@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nonton/theme.dart';
+import 'package:nonton/widget/card_disney.dart';
+import 'package:nonton/widget/movie_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,7 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget header() {
       return Container(
-        margin: EdgeInsets.only(top: 30, left: 24, right: 24),
+        margin: const EdgeInsets.only(top: 30, left: 24, right: 24),
         child: Row(
           children: [
             Container(
@@ -23,7 +25,7 @@ class HomePage extends StatelessWidget {
                         fontWeight: bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 4,
                     ),
                     Text(
@@ -37,7 +39,7 @@ class HomePage extends StatelessWidget {
             Container(
               width: 55,
               height: 45,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/btn_search.png'))),
             ),
@@ -51,95 +53,54 @@ class HomePage extends StatelessWidget {
         margin: const EdgeInsets.only(
           top: 30,
           left: 24,
-          right: 24,
         ),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: [
-              Container(
-                width: 300,
-                decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.circular(21),
-                ),
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 300,
-                          height: 200,
-                          decoration: BoxDecoration(
-                            color: white,
-                            image: DecorationImage(
-                              image: AssetImage('assets/image3.png'),
-                            ),
-                            borderRadius: BorderRadius.circular(21),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 26,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 86),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'John Wick 4',
-                                    style: blackTextStyle.copyWith(
-                                        fontSize: 20, fontWeight: bold),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Text(
-                                    'Jun 17, 2021',
-                                    style: greyTextStyle.copyWith(fontSize: 16),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/ic_star.png',
-                                    width: 18,
-                                  ),
-                                  Image.asset(
-                                    'assets/ic_star.png',
-                                    width: 18,
-                                  ),
-                                  Image.asset(
-                                    'assets/ic_star.png',
-                                    width: 18,
-                                  ),
-                                  Image.asset(
-                                    'assets/ic_star.png',
-                                    width: 18,
-                                  ),
-                                  Image.asset(
-                                    'assets/ic_star.png',
-                                    width: 18,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+            children: const [
+              MovieCard(
+                name: 'John Wick 4',
+                releas: 'Jun 17, 2021',
+                imgUrl: 'assets/image3.png',
+              ),
+              MovieCard(
+                name: 'Bohemian',
+                releas: 'Jun 17, 2021',
+                imgUrl: 'assets/image4.png',
               ),
             ],
           ),
+        ),
+      );
+    }
+
+    Widget fromdisney() {
+      return Container(
+        margin: const EdgeInsets.only(top: 30, right: 24, left: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'From Disney',
+              style: blackTextStyle.copyWith(
+                fontSize: 24,
+                fontWeight: bold,
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const CardDisney(
+              name: 'Mulan Session',
+              imgUrl: 'assets/image7.png',
+              releas: 'Juni 17 2021',
+            ),
+            const CardDisney(
+              name: 'Beauty & Beast',
+              imgUrl: 'assets/image6.png',
+              releas: 'Juni 17 2021',
+            ),
+          ],
         ),
       );
     }
@@ -150,6 +111,7 @@ class HomePage extends StatelessWidget {
           children: [
             header(),
             movie(),
+            fromdisney(),
           ],
         ),
       ),
