@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nonton/pages/succes_page.dart';
 import 'package:nonton/theme.dart';
+import 'package:nonton/widget/gallery.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({Key? key}) : super(key: key);
@@ -44,7 +46,6 @@ class DetailPage extends StatelessWidget {
         margin: const EdgeInsets.only(top: 23, left: 24, right: 24),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(21),
-          color: white,
         ),
         child: Row(
           children: [
@@ -132,11 +133,24 @@ class DetailPage extends StatelessWidget {
                       const SizedBox(
                         width: 6,
                       ),
-                      Text(
-                        '13k people',
-                        style: blackTextStyle.copyWith(
-                          fontSize: 12,
-                          fontWeight: light,
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '13K',
+                              style: blackTextStyle.copyWith(
+                                fontSize: 14,
+                                fontWeight: medium,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' people',
+                              style: blackTextStyle.copyWith(
+                                fontSize: 12,
+                                fontWeight: regular,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -144,22 +158,134 @@ class DetailPage extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  Text(
-                    '1h.30m',
-                    style: blackTextStyle.copyWith(
-                      fontWeight: light,
-                      fontSize: 14,
-                    ),
+                  RichText(
+                    text: TextSpan(
+                        text: '1h 30m',
+                        style: blackTextStyle,
+                        children: [
+                          TextSpan(
+                              text: '\nDolby Production', style: greyTextStyle)
+                        ]),
                   ),
-                  Text(
-                    'Dolby Production',
-                    style:
-                        greyTextStyle.copyWith(fontSize: 12, fontWeight: light),
-                  )
                 ],
               ),
             ),
           ],
+        ),
+      );
+    }
+
+    Widget movieSynopsis() {
+      return Container(
+        margin: EdgeInsets.only(top: 40, left: 24, right: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Movie Synopsis',
+              style: blackTextStyle.copyWith(
+                fontSize: 20,
+                fontWeight: bold,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: Text(
+                'The Dark is a 2018 Austrian horror film\nwritten and directed by Justin P. Lange]nand starring Nadia Alexander, Toby\nNichols, and Karl Markovics.',
+                style: greyTextStyle.copyWith(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Text(
+                  'trying to succeed as something both\nmetaphorical and very literal-minded, the\nmovie ends up being neither one.',
+                  style: greyTextStyle.copyWith(
+                    fontSize: 16,
+                  ),
+                )),
+          ],
+        ),
+      );
+    }
+
+    Widget gallery() {
+      return Container(
+        margin: EdgeInsets.only(
+          top: 30,
+          left: 24,
+          right: 24,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: Text(
+                'Gallery',
+                style: blackTextStyle.copyWith(
+                  fontSize: 20,
+                  fontWeight: bold,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                top: 12,
+              ),
+              child: Row(
+                children: [
+                  galleryCard(
+                    imgUrl: 'assets/gallery1.png',
+                  ),
+                  galleryCard(
+                    imgUrl: 'assets/gallery2.png',
+                  ),
+                  galleryCard(
+                    imgUrl: 'assets/gallery3.png',
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget buttonbuyticket() {
+      return Align(
+        child: Container(
+          margin: EdgeInsets.only(
+            top: 41,
+            bottom: 57,
+          ),
+          width: 220,
+          height: 50,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: blackColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  37,
+                ),
+              ),
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (cotext) => SuccesPage(),
+                ),
+              );
+            },
+            child: Text(
+              'Buy Ticket',
+              style: whiteTextStyle.copyWith(
+                fontSize: 18,
+                fontWeight: semibold,
+              ),
+            ),
+          ),
         ),
       );
     }
@@ -170,6 +296,9 @@ class DetailPage extends StatelessWidget {
           children: [
             header(),
             most(),
+            movieSynopsis(),
+            gallery(),
+            buttonbuyticket(),
           ],
         ),
       ),
