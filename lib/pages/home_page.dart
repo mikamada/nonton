@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nonton/services/movie_service.dart';
 import 'package:nonton/theme.dart';
 import 'package:nonton/widget/card_disney.dart';
 import 'package:nonton/widget/movie_card.dart';
@@ -8,6 +9,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MovieService().getPlayingNowMovies();
     Widget header() {
       return Container(
         margin: const EdgeInsets.only(top: 30, left: 24, right: 24),

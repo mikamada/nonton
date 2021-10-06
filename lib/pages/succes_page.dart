@@ -23,7 +23,7 @@ class SuccesPage extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   top: 7,
                 ),
                 child: Column(children: [
@@ -34,20 +34,22 @@ class SuccesPage extends StatelessWidget {
                       fontWeight: bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
                     'Yes! time to relax yourself by\nwatching the good movie',
                     style: darkgreyTextStyle.copyWith(
                       fontSize: 16,
+                      fontWeight: medium,
+                      height: 1.6,
                     ),
                     textAlign: TextAlign.center,
                   )
                 ]),
               ),
               Container(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   top: 40,
                 ),
                 height: 50,
@@ -62,17 +64,17 @@ class SuccesPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                        (route) => false);
                   },
                   child: Text(
                     'Back To Home',
                     style: blackTextStyle.copyWith(
-                      fontWeight: bold,
+                      fontWeight: FontWeight.w900,
                       fontSize: 18,
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class galleryCard extends StatelessWidget {
   final String imgUrl;
   const galleryCard({
@@ -12,7 +13,7 @@ class galleryCard extends StatelessWidget {
     return Container(
       width: 80,
       height: 80,
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         right: 16,
       ),
       decoration: BoxDecoration(

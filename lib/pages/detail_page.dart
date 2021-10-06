@@ -9,34 +9,39 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget header() {
-      return Container(
-        margin: const EdgeInsets.only(
-          top: 30,
-          left: 24,
-          right: 24,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: 38,
-              height: 38,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/btn_back.png'),
+      return GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Container(
+          margin: const EdgeInsets.only(
+            top: 30,
+            left: 24,
+            right: 24,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 38,
+                height: 38,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/btn_back.png'),
+                  ),
                 ),
               ),
-            ),
-            Container(
-              width: 38,
-              height: 38,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/btn_love.png'),
+              Container(
+                width: 38,
+                height: 38,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/btn_love.png'),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     }
@@ -177,7 +182,7 @@ class DetailPage extends StatelessWidget {
 
     Widget movieSynopsis() {
       return Container(
-        margin: EdgeInsets.only(top: 40, left: 24, right: 24),
+        margin: const EdgeInsets.only(top: 40, left: 24, right: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -189,7 +194,7 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               child: Text(
                 'The Dark is a 2018 Austrian horror film\nwritten and directed by Justin P. Lange]nand starring Nadia Alexander, Toby\nNichols, and Karl Markovics.',
                 style: greyTextStyle.copyWith(
@@ -198,7 +203,7 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 child: Text(
                   'trying to succeed as something both\nmetaphorical and very literal-minded, the\nmovie ends up being neither one.',
                   style: greyTextStyle.copyWith(
@@ -212,7 +217,7 @@ class DetailPage extends StatelessWidget {
 
     Widget gallery() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 30,
           left: 24,
           right: 24,
@@ -230,11 +235,11 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: 12,
               ),
               child: Row(
-                children: [
+                children: const [
                   galleryCard(
                     imgUrl: 'assets/gallery1.png',
                   ),
@@ -255,7 +260,7 @@ class DetailPage extends StatelessWidget {
     Widget buttonbuyticket() {
       return Align(
         child: Container(
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             top: 41,
             bottom: 57,
           ),
@@ -274,7 +279,7 @@ class DetailPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (cotext) => SuccesPage(),
+                  builder: (cotext) => const SuccesPage(),
                 ),
               );
             },
