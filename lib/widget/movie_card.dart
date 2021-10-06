@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:nonton/models/movie_model.dart';
 import 'package:nonton/pages/detail_page.dart';
 
 import '../theme.dart';
 
 class MovieCard extends StatelessWidget {
-  final String name;
-  final String releas;
-  final String imgUrl;
+  // final String name;
+  // final String releas;
+  // final String imgUrl;
+
+  final MovieModel movie;
+
   const MovieCard({
     Key? key,
-    required this.imgUrl,
-    required this.name,
-    required this.releas,
+    // required this.imgUrl,
+    // required this.name,
+    // required this.releas,
+    required this.movie,
   }) : super(key: key);
 
   @override
@@ -43,7 +48,8 @@ class MovieCard extends StatelessWidget {
               height: 200,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(imgUrl),
+                  image: NetworkImage(movie.posterPath),
+                  fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.circular(21),
               ),
@@ -55,26 +61,30 @@ class MovieCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        style: blackTextStyle.copyWith(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900,
+                  child: Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          movie.title,
+                          style: blackTextStyle.copyWith(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        releas,
-                        style: greyTextStyle.copyWith(
-                          fontSize: 16,
+                        const SizedBox(
+                          height: 4,
                         ),
-                      ),
-                    ],
+                        Text(
+                          movie.releaseDate.toString(),
+                          style: greyTextStyle.copyWith(
+                            fontSize: 16,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Container(

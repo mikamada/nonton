@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nonton/blocs/home/home_bloc.dart';
+import 'package:nonton/models/movie_model.dart';
 import 'package:nonton/services/movie_service.dart';
 import 'package:nonton/theme.dart';
 import 'package:nonton/widget/card_disney.dart';
@@ -9,7 +12,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MovieService().getPlayingNowMovies();
     Widget header() {
       return Container(
         margin: const EdgeInsets.only(top: 30, left: 24, right: 24),
@@ -50,7 +52,7 @@ class HomePage extends StatelessWidget {
       );
     }
 
-    Widget movie() {
+    Widget movie(List<MovieModel> data) {
       return Container(
         margin: const EdgeInsets.only(
           top: 30,
@@ -59,18 +61,19 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: const [
-              MovieCard(
-                name: 'John Wick 4',
-                releas: 'Jun 17, 2021',
-                imgUrl: 'assets/image3.png',
-              ),
-              MovieCard(
-                name: 'Bohemian',
-                releas: 'Jun 17, 2021',
-                imgUrl: 'assets/image4.png',
-              ),
-            ],
+            // children: const [
+            //   MovieCard(
+            //     name: 'John Wick 4',
+            //     releas: 'Jun 17, 2021',
+            //     imgUrl: 'assets/image3.png',
+            //   ),
+            //   MovieCard(
+            //     name: 'Bohemian',
+            //     releas: 'Jun 17, 2021',
+            //     imgUrl: 'assets/image4.png',
+            //   ),
+            // ],
+            children: data.map((e) => MovieCard(movie: e)).toList(),
           ),
         ),
       );
@@ -108,14 +111,29 @@ class HomePage extends StatelessWidget {
     }
 
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          children: [
-            header(),
-            movie(),
-            fromdisney(),
-          ],
-        ),
+      body: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          if (state is HomeLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is HomeSucces) {
+            return SafeArea(
+              child: ListView(
+                children: [
+                  header(),
+                  movie(state.data),
+                  fromdisney(),
+                ],
+              ),
+            );
+          }
+
+          return Center(
+            child: Text('Data idak bisa dimuat'),
+          );
+        },
       ),
     );
   }
