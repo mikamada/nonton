@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nonton/blocs/home/home_bloc.dart';
+import 'package:nonton/models/disney_model.dart';
 import 'package:nonton/models/movie_model.dart';
 import 'package:nonton/services/movie_service.dart';
 import 'package:nonton/theme.dart';
@@ -79,7 +80,7 @@ class HomePage extends StatelessWidget {
       );
     }
 
-    Widget fromdisney() {
+    Widget fromdisney(List<MovieModel> data) {
       return Container(
         margin: const EdgeInsets.only(top: 30, right: 24, left: 24),
         child: Column(
@@ -95,15 +96,22 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const CardDisney(
-              name: 'Mulan Session',
-              imgUrl: 'assets/image7.png',
-              releas: 'Juni 17 2021',
-            ),
-            const CardDisney(
-              name: 'Beauty & Beast',
-              imgUrl: 'assets/image6.png',
-              releas: 'Juni 17 2021',
+            Container(
+              child: Column(
+                // children: [
+                //   const CardDisney(
+                //   name: 'Mulan Session',
+                //   imgUrl: 'assets/image7.png',
+                //   releas: 'Juni 17 2021',
+                // ),
+                // const CardDisney(
+                //   name: 'Beauty & Beast',
+                //   imgUrl: 'assets/image6.png',
+                //   releas: 'Juni 17 2021',
+                // ),
+                // ],
+                children: data.map((e) => CardDisney(disney: e)).toList(),
+              ),
             ),
           ],
         ),
@@ -114,7 +122,7 @@ class HomePage extends StatelessWidget {
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           if (state is HomeLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -123,13 +131,12 @@ class HomePage extends StatelessWidget {
               child: ListView(
                 children: [
                   header(),
-                  movie(state.data),
-                  fromdisney(),
+                  movie(state.nowPlayingMovies),
+                  fromdisney(state.upComingMovies),
                 ],
               ),
             );
           }
-
           return Center(
             child: Text('Data idak bisa dimuat'),
           );
